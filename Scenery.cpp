@@ -96,18 +96,10 @@ int Scenery::three_condition(int i) {
     return index;
 }
 
-void Scenery::remove_agents_disable() {
-    for (int i = 0; i < BOOTH_AMOUNT; i++) {
-        if (*(block_m + i) == -1)
-            *(block_m + i) = 0;
-    }
-}
-
 int Scenery::algorithm(int *block_c, int agent, int condition) {
     int index_bkp = -1, index = -1, *block_cp;
     
     set_block(block_c);
-    remove_agents_disable();
     block_cp = cp_pointer(block_c);
     set_block(block_cp);
     if (agent == AGENTS_AMOUNT) 
@@ -115,24 +107,14 @@ int Scenery::algorithm(int *block_c, int agent, int condition) {
     
     if (agent <= AGENTS_AMOUNT) {
         do {
-            
-//            printf("\nAgent %d in process...", agent);
-//            printf("\nblock_c: %u ", block_c);
-//            set_block(block_c);
-//            print_block();
-//            printf("\nblock_cp: %u ", block_cp);            
-//            set_block(block_cp);
-//            print_block();
-            
+            //printf("\nAgent %d in process...", agent);            
             index =  (condition == 1 || condition == 0) ? one_condition(index_bkp + 1) : -1;
             if (index < 0) {
                 index = (condition == 2 || condition == 0) ? two_condition(index_bkp + 1) : -1;                
                 if (index < 0) {
                     index = (condition == 3 || condition == 0) ? three_condition(index_bkp + 1) : -1;
-                    if (index < 0) {
-                        set_block(block_c);
-                        block_cp = NULL;
-                        remove_agents_disable();
+                    if (index < 0) {                        
+                        block_cp = NULL;                        
                         delete block_cp;
                         return 0;
                     } else {
@@ -164,7 +146,7 @@ int Scenery::algorithm(int *block_c, int agent, int condition) {
 }
 
 void Scenery::start() {
-    int *booth_1 = malloc_block(), index;
+    int *booth_1 = malloc_block();
     clock_t t1, t2;
     
     set_block(booth_1);

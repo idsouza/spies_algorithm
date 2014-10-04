@@ -20,7 +20,6 @@ private:
     bool is_null(int index);
     int* malloc_block();
     int* cp_pointer(int *p1);
-    void remove_agents_disable();
     void set_agent(const int agent, const int index);
     int one_condition(int i);
     int two_condition(int i);
