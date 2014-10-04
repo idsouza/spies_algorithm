@@ -1,7 +1,7 @@
 #ifndef SCENERY_H
 #define	SCENERY_H
 
-#define BOOTH_AMOUNT 4
+#define BOOTH_AMOUNT 3
 #define AGENTS_AMOUNT 4
 
 class Scenery {
@@ -11,7 +11,7 @@ public:
     void start();    
 private:
     int *block_m;   
-    unsigned short int variations;
+    unsigned int variations;
     
     int algorithm(int *booth_c, int agent, int condition);
     void init_block();
