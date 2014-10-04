@@ -1,7 +1,7 @@
 #ifndef SCENERY_H
 #define	SCENERY_H
 
-#define BOOTH_AMOUNT 3
+#define BOOTH_AMOUNT 4
 #define AGENTS_AMOUNT 4
 
 class Scenery {
