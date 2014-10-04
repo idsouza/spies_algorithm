@@ -107,7 +107,6 @@ int Scenery::algorithm(int *block_c, int agent, int condition) {
     
     if (agent <= AGENTS_AMOUNT) {
         do {
-            //printf("\nAgent %d in process...", agent);            
             index =  (condition == 1 || condition == 0) ? one_condition(index_bkp + 1) : -1;
             if (index < 0) {
                 index = (condition == 2 || condition == 0) ? two_condition(index_bkp + 1) : -1;                
