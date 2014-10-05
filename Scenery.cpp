@@ -97,15 +97,15 @@ int Scenery::three_condition(int i) {
 }
 
 int Scenery::algorithm(int *block_c, int agent, int condition) {
-    int index_bkp = -1, index = -1, *block_cp;
-    
-    set_block(block_c);
-    block_cp = cp_pointer(block_c);
-    set_block(block_cp);
-    if (agent == AGENTS_AMOUNT) 
-        this->variations++;  
-    
     if (agent <= AGENTS_AMOUNT) {
+        int index_bkp = -1, index = -1, *block_cp;
+        
+        block_cp = cp_pointer(block_c);
+        set_block(block_cp);
+        
+        if (agent == AGENTS_AMOUNT) 
+            this->variations++;
+        
         do {
             index =  (condition == 1 || condition == 0) ? one_condition(index_bkp + 1) : -1;
             if (index < 0) {
@@ -128,9 +128,8 @@ int Scenery::algorithm(int *block_c, int agent, int condition) {
             
             index_bkp = index;
             
-            set_block(block_c);
             set_agent(agent, index);
-            set_block(block_cp);
+            set_block(block_c);
             set_agent(agent, index);
             
             algorithm(block_cp, agent + 1, 0);
@@ -142,6 +141,8 @@ int Scenery::algorithm(int *block_c, int agent, int condition) {
             
         } while (index >= 0); 
     }
+        
+    return 1;
 }
 
 void Scenery::start() {
@@ -153,6 +154,8 @@ void Scenery::start() {
     t1 = clock();
     algorithm(booth_1, 1, 1);
     t2 = clock();
+    booth_1 = NULL;
+    delete booth_1;
     
     printf("\nAmount Variations: %d", this->variations);
     printf("\nMilliseconds: %fms", (((float) t2 - (float) t1) / 1000000.0F) * 1000);
@@ -162,5 +165,4 @@ void Scenery::print_block() {
     for (int i = 0; i < BOOTH_AMOUNT; i++) {
         printf("%d ", *(this->block_m + i));        
     }
-    printf("\n");
 }
